@@ -183,21 +183,21 @@ namespace Hospital.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     MedicalHistory = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     AdditionalInformation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    TreatingDoctorId = table.Column<int>(type: "int", nullable: false)
+                    DoctorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Patients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Patients_Doctors_TreatingDoctorId",
-                        column: x => x.TreatingDoctorId,
+                        name: "FK_Patients_Doctors_DoctorId",
+                        column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointments",
+                name: "DoctorsPatients",
                 columns: table => new
                 {
                     PatientId = table.Column<int>(type: "int", nullable: false),
@@ -205,25 +205,20 @@ namespace Hospital.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointments", x => new { x.PatientId, x.DoctorId });
+                    table.PrimaryKey("PK_DoctorsPatients", x => new { x.PatientId, x.DoctorId });
                     table.ForeignKey(
-                        name: "FK_Appointments_Doctors_DoctorId",
+                        name: "FK_DoctorsPatients_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Appointments_Patients_PatientId",
+                        name: "FK_DoctorsPatients_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Appointments_DoctorId",
-                table: "Appointments",
-                column: "DoctorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -265,16 +260,18 @@ namespace Hospital.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patients_TreatingDoctorId",
+                name: "IX_DoctorsPatients_DoctorId",
+                table: "DoctorsPatients",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patients_DoctorId",
                 table: "Patients",
-                column: "TreatingDoctorId");
+                column: "DoctorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Appointments");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -291,13 +288,16 @@ namespace Hospital.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Patients");
+                name: "DoctorsPatients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

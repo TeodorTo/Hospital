@@ -36,7 +36,8 @@ public class Patient
     public string AdditionalInformation { get; set; } = string.Empty;
     
     [ForeignKey(nameof(Doctor))]
-    public int TreatingDoctorId { get; set; }
+    public int DoctorId { get; set; }
+    
     public Doctor Doctor { get; set; } = null!;
 
 }

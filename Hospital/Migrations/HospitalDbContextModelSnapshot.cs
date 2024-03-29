@@ -67,7 +67,7 @@ namespace Hospital.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("DoctorsPatients");
                 });
 
             modelBuilder.Entity("Hospital.Data.Patient", b =>
@@ -91,6 +91,9 @@ namespace Hospital.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -111,12 +114,9 @@ namespace Hospital.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("TreatingDoctorId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TreatingDoctorId");
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("Patients");
                 });
@@ -326,7 +326,7 @@ namespace Hospital.Migrations
             modelBuilder.Entity("Hospital.Data.DoctorPatient", b =>
                 {
                     b.HasOne("Hospital.Data.Doctor", "Doctor")
-                        .WithMany("Patients")
+                        .WithMany("DoctorsPatients")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -346,7 +346,7 @@ namespace Hospital.Migrations
                 {
                     b.HasOne("Hospital.Data.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("TreatingDoctorId")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -406,7 +406,7 @@ namespace Hospital.Migrations
 
             modelBuilder.Entity("Hospital.Data.Doctor", b =>
                 {
-                    b.Navigation("Patients");
+                    b.Navigation("DoctorsPatients");
                 });
 #pragma warning restore 612, 618
         }

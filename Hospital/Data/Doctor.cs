@@ -22,5 +22,5 @@ public class Doctor
     [MaxLength(DoctorWorkingHoursMaxLength)]
     public string WorkingHours { get; set; } = string.Empty;
 
-    public ICollection<DoctorPatient>? Patients { get; set; } = new List<DoctorPatient>();
+    public ICollection<DoctorPatient>? DoctorsPatients { get; set; } = new List<DoctorPatient>();
 }

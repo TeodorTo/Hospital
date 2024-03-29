@@ -11,7 +11,7 @@ public class HospitalDbContext : IdentityDbContext
     }
     public DbSet<Doctor>? Doctors { get; set; }
     public DbSet<Patient>? Patients { get; set; }
-    public DbSet<DoctorPatient>? Appointments { get; set; }
+    public DbSet<DoctorPatient>? DoctorsPatients { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,7 +20,7 @@ public class HospitalDbContext : IdentityDbContext
 
         modelBuilder.Entity<DoctorPatient>()
             .HasOne(a => a.Doctor)
-            .WithMany(a => a.Patients)
+            .WithMany(a => a.DoctorsPatients)
             .OnDelete(DeleteBehavior.Restrict);
 
         base.OnModelCreating(modelBuilder);
