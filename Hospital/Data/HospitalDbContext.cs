@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,23 +10,54 @@ public class HospitalDbContext : IdentityDbContext
     :base(options)
     {
     }
-    public DbSet<Doctor>? Doctors { get; set; }
-    public DbSet<Patient>? Patients { get; set; }
-    public DbSet<DoctorPatient>? DoctorsPatients { get; set; }
+    
+    public DbSet<Patient> Patients { get; set; }
+    public DbSet<Doctor> Doctors { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<BillingRecord> BillingRecords { get; set; }
 
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<DoctorPatient>()
-            .HasKey(key => new { key.PatientId, key.DoctorId });
-
-        modelBuilder.Entity<DoctorPatient>()
-            .HasOne(a => a.Doctor)
-            .WithMany(a => a.DoctorsPatients)
-            .OnDelete(DeleteBehavior.Restrict);
-
         base.OnModelCreating(modelBuilder);
 
-        
+        modelBuilder.Entity<IdentityUser>(b =>
+        {
+            b.HasKey(u => u.Id);
+        });
+        modelBuilder.Entity<Appointment>()
+            .HasOne(a => a.Patient)
+            .WithMany(p => p.Appointments)
+            .HasForeignKey(a => a.PatientId);
+
+        modelBuilder.Entity<Appointment>()
+            .HasOne(a => a.Doctor)
+            .WithMany()
+            .HasForeignKey(a => a.DoctorId);
+
+        modelBuilder.Entity<Appointment>()
+            .HasOne(a => a.AppointmentType)
+            .WithMany()
+            .HasForeignKey(a => a.AppointmentTypeId);
+
+        modelBuilder.Entity<Appointment>()
+            .HasOne(a => a.AppointmentStatus)
+            .WithMany()
+            .HasForeignKey(a => a.AppointmentStatusId);
+
+        modelBuilder.Entity<BillingRecord>()
+            .HasOne(b => b.Appointment)
+            .WithMany()
+            .HasForeignKey(b => b.AppointmentId);
+            
+
+        modelBuilder.Entity<BillingRecord>()
+            .HasOne(b => b.Patient)
+            .WithMany()
+            .HasForeignKey(b => b.PatientId)
+            .OnDelete(DeleteBehavior.NoAction);
+
     }
 
    

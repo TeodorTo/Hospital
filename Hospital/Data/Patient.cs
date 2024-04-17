@@ -1,6 +1,5 @@
 using static Hospital.Data.DataConstants;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital.Data;
 
@@ -34,10 +33,10 @@ public class Patient
     
     [MaxLength(PatientAdditionalInformationMaxLength)]
     public string AdditionalInformation { get; set; } = string.Empty;
+
     
-    [ForeignKey(nameof(Doctor))]
-    public int DoctorId { get; set; }
-    
-    public Doctor Doctor { get; set; } = null!;
+    public virtual ICollection<Appointment> Appointments { get; set; } = null!;
+
+
 
 }

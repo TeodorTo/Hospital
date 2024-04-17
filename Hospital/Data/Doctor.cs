@@ -4,15 +4,16 @@ namespace Hospital.Data;
 
 public class Doctor
 {
-    [Key] public int Id { get; set; }
+    [Key] 
+    public int DoctorId { get; set; }
 
     [Required]
     [MaxLength(DoctorNameMaxLength)]
     public string Name { get; set; } = string.Empty;
 
     [Required]
-    [MaxLength(DoctorSpecializationMaxLength)]
-    public string Specialization { get; set; } = string.Empty;
+    [MaxLength(DoctorSpecialtyMaxLength)]
+    public string Specialty { get; set; } = string.Empty;
 
     [Required]
     [MaxLength(DoctorOfficeMaxLength)]
@@ -22,5 +23,5 @@ public class Doctor
     [MaxLength(DoctorWorkingHoursMaxLength)]
     public string WorkingHours { get; set; } = string.Empty;
 
-    public ICollection<DoctorPatient>? DoctorsPatients { get; set; } = new List<DoctorPatient>();
+    public virtual Department Department { get; set; } = null!;
 }

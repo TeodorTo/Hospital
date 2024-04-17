@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj": {}
+    "C:\\Users\\Teodor\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj": {}
   },
   "projects": {
-    "D:\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj": {
+    "C:\\Users\\Teodor\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj",
+        "projectUniqueName": "C:\\Users\\Teodor\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj",
         "projectName": "Hospital",
-        "projectPath": "D:\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj",
+        "projectPath": "C:\\Users\\Teodor\\RiderProjects\\Hospital\\Hospital\\Hospital.csproj",
         "packagesPath": "C:\\Users\\Teodor\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\Hospital\\Hospital\\obj\\",
+        "outputPath": "C:\\Users\\Teodor\\RiderProjects\\Hospital\\Hospital\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -92,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.420\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.421\\RuntimeIdentifierGraph.json"
         }
       }
     }
