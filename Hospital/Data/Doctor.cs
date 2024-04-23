@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.CodeAnalysis.Operations;
 using static Hospital.Data.DataConstants;
 namespace Hospital.Data;
 
@@ -23,5 +25,10 @@ public class Doctor
     [MaxLength(DoctorWorkingHoursMaxLength)]
     public string WorkingHours { get; set; } = string.Empty;
 
-    public virtual Department Department { get; set; } = null!;
+    [Required]
+    public int DepartmentId { get; set; }
+
+    [ForeignKey(nameof(DepartmentId))] 
+    public Department Department { get; set; } = null!;
+    
 }

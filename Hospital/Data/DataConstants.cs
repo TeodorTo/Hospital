@@ -10,7 +10,9 @@ public static class DataConstants
     public const int PatientPhoneNumberMaxLength = 20;
 
     public const int DoctorNameMaxLength = 150;
+    public const int DoctorNameMinLength = 3;
     public const int DoctorSpecialtyMaxLength = 100;
+    public const int DoctorSpecialtyMinLength = 0;
     public const int DoctorOfficeMaxLength = 10;
     public const int DoctorWorkingHoursMaxLength = 20;
 

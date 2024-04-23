@@ -57,7 +57,26 @@ public class HospitalDbContext : IdentityDbContext
             .WithMany()
             .HasForeignKey(b => b.PatientId)
             .OnDelete(DeleteBehavior.NoAction);
+        
+        
 
+        modelBuilder
+            .Entity<Department>()
+            .HasData(new Department()
+                {
+                    DepartmentId = 1,
+                    Name = "Gastro",
+                    Description = "stomasi opravqme burzo"
+                },
+                new Department()
+                {
+                    DepartmentId = 2,
+                    Name = "GP",
+                    Description = "ot vsichkoto nai dobroto"
+                    
+                } );
+ 
+        base.OnModelCreating(modelBuilder);
     }
 
    

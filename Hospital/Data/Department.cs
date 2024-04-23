@@ -15,5 +15,5 @@ public class Department
     [MaxLength(DepartmentDescMaxLenght)]
     public string Description { get; set; } = string.Empty;
 
-    public virtual IList<Doctor> Doctors { get; set; } = new List<Doctor>();
+    public virtual IEnumerable<Doctor> Doctors { get; set; } = new List<Doctor>();
 }
