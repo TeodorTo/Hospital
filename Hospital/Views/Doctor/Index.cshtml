@@ -1,0 +1,32 @@
+@model IEnumerable<DoctorAllViewModel>
+
+<h2>Doctor List</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>Department</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var doctor in Model)
+    {
+    <tr>
+        <td>@doctor.Id</td>
+        <td>@doctor.Name</td>
+        <td>@doctor.Specialty</td>
+        <td>@doctor.DepartmentName</td> <!-- Display department name -->
+
+        <td>
+            <a asp-action="Details" asp-route-id="@doctor.Id">Details</a> |
+            <a asp-action="Edit" asp-route-id="@doctor.Id">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@doctor.Id">Delete</a>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>

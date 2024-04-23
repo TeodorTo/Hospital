@@ -1,0 +1,52 @@
+@model Hospital.Models.DoctorAddViewModel
+@{
+    ViewBag.Title = "Add Doctor";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="Add" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label-add-edit">Doctor Name</label>
+                <input asp-for="Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Specialty" class="form-label-add-edit">Specialty</label>
+                <input asp-for="Specialty" class="form-control" aria-required="true" />
+                <span asp-validation-for="Specialty" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Office" class="form-label-add-edit">Office</label>
+                <input asp-for="Office" class="form-control" aria-required="true" />
+                <span asp-validation-for="Office" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WorkingHours" class="form-label-add-edit">Working Hours</label>
+                <input asp-for="WorkingHours" class="form-control" aria-required="true" />
+                <span asp-validation-for="WorkingHours" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="DepartmentId" class="form-label-add-edit">Select Department</label>
+                <select asp-for="DepartmentId" class="form-control" aria-required="true">
+                    <option disabled selected value="">Select Department...</option>
+                    @foreach (var department in Model.Departments)
+                    {
+                        <option value="@department.Id">@department.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Add Doctor" class="btn btn-warning mb-2 w-100 p-3 fw-bold" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
