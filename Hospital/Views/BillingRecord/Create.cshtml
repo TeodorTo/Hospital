@@ -1,0 +1,36 @@
+@model Hospital.Models.BillingRecordViewModel
+
+<h1>Create</h1>
+
+<div>
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="AppointmentId"></label>
+            <select asp-for="AppointmentId" class="form-control" asp-items="@ViewBag.Appointments"></select>
+            <span asp-validation-for="AppointmentId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PatientId"></label>
+            <select asp-for="PatientId" class="form-control" asp-items="@ViewBag.Patients"></select>
+            <span asp-validation-for="PatientId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Amount"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="BillingDate"></label>
+            <input asp-for="BillingDate" class="form-control" />
+            <span asp-validation-for="BillingDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Notes"></label>
+            <input asp-for="Notes" class="form-control" />
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

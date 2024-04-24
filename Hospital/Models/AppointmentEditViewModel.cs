@@ -35,8 +35,8 @@ namespace Hospital.Models
 
         // Define these properties to hold the lists of patients, doctors, appointment types, and appointment statuses
         public List<Patient> Patients { get; set; }
-        public List<Doctor> Doctors { get; set; }
-        public List<AppointmentType> AppointmentTypes { get; set; }
-        public List<AppointmentStatus> AppointmentStatuses { get; set; }
-    }
-}
+         public List<Doctor> Doctors { get; set; }
+         public List<AppointmentType> AppointmentTypes { get; set; }
+         public List<AppointmentStatus> AppointmentStatuses { get; set; }
+     }
+ }

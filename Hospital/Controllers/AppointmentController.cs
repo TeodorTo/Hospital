@@ -237,7 +237,7 @@ namespace Hospital.Controllers
                 return NotFound();
             }
 
-            var viewModel = new AppointmentViewModel // Adjust to match your existing AppointmentViewModel structure
+            var viewModel = new AppointmentDeleteViewModel() // Adjust to match your existing AppointmentViewModel structure
             {
                 Id = appointment.AppointmentId,
                 DateTime = appointment.DateTime,
@@ -250,6 +250,7 @@ namespace Hospital.Controllers
 
             return View(viewModel);
         }
+
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
