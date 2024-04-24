@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hospital.Data;
 
-public class HospitalDbContext : IdentityDbContext
+public class HospitalDbContext : IdentityDbContext<ApplicationUser>
 {
     public HospitalDbContext(DbContextOptions<HospitalDbContext> options)
     :base(options)
