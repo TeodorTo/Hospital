@@ -13,4 +13,6 @@ public class AppointmentType
 
     [MaxLength(AppointmentTypeDescMaxLenght)]
     public string Description { get; set; } = String.Empty;
+    
+    
 }

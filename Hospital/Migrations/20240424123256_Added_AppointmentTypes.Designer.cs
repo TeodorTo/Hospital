@@ -4,6 +4,7 @@ using Hospital.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospital.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240424123256_Added_AppointmentTypes")]
+    partial class Added_AppointmentTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,23 +81,6 @@ namespace Hospital.Migrations
                     b.HasKey("AppointmentStatusId");
 
                     b.ToTable("AppointmentStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            AppointmentStatusId = 1,
-                            Name = "Scheduled"
-                        },
-                        new
-                        {
-                            AppointmentStatusId = 2,
-                            Name = "Cancelled"
-                        },
-                        new
-                        {
-                            AppointmentStatusId = 3,
-                            Name = "Completed"
-                        });
                 });
 
             modelBuilder.Entity("Hospital.Data.AppointmentType", b =>
@@ -119,26 +104,6 @@ namespace Hospital.Migrations
                     b.HasKey("AppointmentTypeId");
 
                     b.ToTable("AppointmentTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            AppointmentTypeId = 1,
-                            Description = "Regular checkup",
-                            Name = "Checkup"
-                        },
-                        new
-                        {
-                            AppointmentTypeId = 2,
-                            Description = "Emergency appointment",
-                            Name = "Emergency"
-                        },
-                        new
-                        {
-                            AppointmentTypeId = 3,
-                            Description = "Follow-up appointment",
-                            Name = "Follow-up"
-                        });
                 });
 
             modelBuilder.Entity("Hospital.Data.BillingRecord", b =>

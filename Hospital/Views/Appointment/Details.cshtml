@@ -1,0 +1,54 @@
+@model Hospital.Models.AppointmentViewModel
+
+<h2>Appointment Details</h2>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            <strong>Date and Time:</strong>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.DateTime
+        </dd>
+
+        <dt class="col-sm-2">
+            <strong>Patient Name:</strong>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.PatientName
+        </dd>
+
+        <dt class="col-sm-2">
+            <strong>Doctor Name:</strong>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.DoctorName
+        </dd>
+
+        <dt class="col-sm-2">
+            <strong>Appointment Type:</strong>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.AppointmentType
+        </dd>
+
+        <dt class="col-sm-2">
+            <strong>Appointment Status:</strong>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.AppointmentStatus
+        </dd>
+
+        <dt class="col-sm-2">
+            <strong>Reason:</strong>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Reason
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
