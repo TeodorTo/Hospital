@@ -30,6 +30,13 @@ public class AdminController : Controller
         return View(roles);
     }
 
+    
+    
+    public IActionResult CreateRole()
+    {
+        return View();
+    }
+    
     // Action method for creating a new role
     [HttpPost]
     public async Task<IActionResult> CreateRole(string roleName)
