@@ -1,61 +1,122 @@
 using Hospital.Data;
-using Microsoft.AspNetCore.Authorization;
+using Hospital.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Hospital.Models; // Import your data models here
 
-[Authorize(Roles = "Admin")] // Restrict access to users with the "Admin" role
-public class AdminController : Controller
-{
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
+// Import your data models here
 
-    public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
-    {
-        _userManager = userManager;
-        _roleManager = roleManager;
-    }
+ // Restrict access to users with the "Admin" role
+ namespace Hospital.Controllers;
 
-    // Action method for managing admin users
-    public IActionResult ManageUsers()
-    {
-        var users = _userManager.Users;
-        return View(users);
-    }
+ public class AdminController : Controller
+ {
+     private readonly UserManager<IdentityUser> _userManager;
+     private readonly RoleManager<IdentityRole> _roleManager;
 
-    // Action method for managing roles
-    public IActionResult ManageRoles()
-    {
-        var roles = _roleManager.Roles;
-        return View(roles);
-    }
+     public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+     {
+         _userManager = userManager;
+         _roleManager = roleManager;
+     }
+
+     // Action method for managing admin users
+     
+     
+     public IActionResult Index()
+     {
+         return View();
+     }
+     
+     
+     public IActionResult ManageUsers()
+     {
+         var users = _userManager.Users;
+         return View(users);
+     }
+
+     // Action method for managing roles
+     public IActionResult ManageRoles()
+     {
+         var roles = _roleManager.Roles;
+         return View(roles);
+     }
 
     
     
-    public IActionResult CreateRole()
-    {
-        return View();
-    }
+     public IActionResult CreateRole()
+     {
+         return View();
+     }
     
-    // Action method for creating a new role
-    [HttpPost]
-    public async Task<IActionResult> CreateRole(string roleName)
-    {
-        if (!string.IsNullOrEmpty(roleName))
-        {
-            var role = new IdentityRole(roleName);
-            var result = await _roleManager.CreateAsync(role);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ManageRoles");
-            }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
-        }
-        return View();
-    }
+     // Action method for creating a new role
+     [HttpPost]
+     public async Task<IActionResult> CreateRole(string roleName)
+     {
+         if (!string.IsNullOrEmpty(roleName))
+         {
+             var role = new IdentityRole(roleName);
+             var result = await _roleManager.CreateAsync(role);
+             if (result.Succeeded)
+             {
+                 return RedirectToAction("ManageRoles");
+             }
+             foreach (var error in result.Errors)
+             {
+                 ModelState.AddModelError("", error.Description);
+             }
+         }
+         return View();
+     }
+     
+     
+     
+     public IActionResult AssignRoles()
+     {
+         var viewModel = new AssignRolesViewModel
+         {
+             Users = _userManager.Users.ToList(),
+             Roles = _roleManager.Roles.ToList()
+         };
 
-    // Other action methods for CRUD operations on users, roles, content management, etc.
-}
+         return View(viewModel);
+     }
+
+
+     [HttpPost]
+     public async Task<IActionResult> AssignRoles(string userId, string roleId)
+     {
+         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(roleId))
+         {
+             // Handle invalid input
+             return RedirectToAction("AssignRoles");
+         }
+
+         var user = await _userManager.FindByIdAsync(userId);
+         var role = await _roleManager.FindByIdAsync(roleId);
+
+         if (user == null || role == null)
+         {
+             // Handle invalid user or role
+             return RedirectToAction("AssignRoles");
+         }
+
+         var result = await _userManager.AddToRoleAsync(user, role.Name);
+
+         if (result.Succeeded)
+         {
+             // Role assignment successful
+             return RedirectToAction("AssignRoles");
+         }
+         else
+         {
+             // Handle error
+             // You may want to display error messages to the user
+             return RedirectToAction("AssignRoles");
+         }
+     }
+
+
+
+
+     // Other action methods for CRUD operations on users, roles, content management, etc.
+ }

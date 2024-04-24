@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using Hospital.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hospital.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class BillingRecordController : Controller
     {
         private readonly HospitalDbContext _context;

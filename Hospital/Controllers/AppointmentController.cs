@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hospital.Controllers
 {
+    [Authorize]
     public class AppointmentController : Controller
     {
         private readonly HospitalDbContext _context;

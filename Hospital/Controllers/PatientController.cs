@@ -1,12 +1,14 @@
 using Hospital.Data;
 using Hospital.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hospital.Controllers;
-
+[Authorize(Roles = "Manager")]
 public class PatientController : Controller
 {
+    
     private readonly HospitalDbContext _context;
 
     public PatientController(HospitalDbContext context)

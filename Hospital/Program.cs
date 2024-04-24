@@ -18,7 +18,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = true;
         }
-    )
+    )   
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<HospitalDbContext>();
     
 builder.Services.AddControllersWithViews();
@@ -49,5 +50,39 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new[] { "Admin", "Manager", "User" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+            await roleManager.CreateAsync(new IdentityRole(role));
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    const string email = "admin@test.test";
+    const string password = "Admin123#";
+    
+    if (await userManager.FindByEmailAsync(email) == null)
+    {
+        var user = new IdentityUser
+        {
+            UserName = email,
+            Email = email
+        };
+
+        await userManager.CreateAsync(user, password);
+
+      await userManager.AddToRoleAsync(user, "Admin");
+    }
+}
+
 
 app.Run();

@@ -1,0 +1,27 @@
+@{
+ViewData["Title"] = "Admin Dashboard";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to the Admin Dashboard</h1>
+
+    <div class="btn-group">
+        <a class="btn btn-primary" href="@Url.Action("ManageUsers", "Admin")">Manage Users</a>
+        <a class="btn btn-primary" href="@Url.Action("ManageRoles", "Admin")">Manage Roles</a>
+        <a class="btn btn-primary" href="@Url.Action("CreateRole", "Admin")">Create Role</a>
+        <a class="btn btn-primary" href="@Url.Action("AssignRoles", "Admin")">Assign Roles</a>
+        <!-- Add buttons for other pages here -->
+    </div>
+</div>
+
+</body>
+</html>
